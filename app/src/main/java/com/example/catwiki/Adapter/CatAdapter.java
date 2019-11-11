@@ -101,7 +101,7 @@ public class CatAdapter extends RecyclerView.Adapter<CatAdapter.CatViewHolder> i
         protected void publishResults(CharSequence constraint, FilterResults results) {
             cats.clear();
             cats.addAll((ArrayList) results.values);
-            notifyDataSetChanged();;
+            notifyDataSetChanged();
         }
     };
 }

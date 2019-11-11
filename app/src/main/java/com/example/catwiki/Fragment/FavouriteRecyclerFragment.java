@@ -20,8 +20,6 @@ import com.example.catwiki.R;
 
 import java.util.ArrayList;
 
-import static com.example.catwiki.Adapter.FavAdapter.favCats;
-
 public class FavouriteRecyclerFragment extends Fragment {
 
     public RecyclerView recyclerView;
@@ -47,7 +45,7 @@ public class FavouriteRecyclerFragment extends Fragment {
 
         status = view.findViewById(R.id.empty);
 
-        if (favCats.size() == 0){
+        if (FavAdapter.favCats.size() == 0){
             status.setText("No Favourites");
         } else {
             status.setText("");
@@ -63,12 +61,8 @@ public class FavouriteRecyclerFragment extends Fragment {
 
         @Override
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-            favCats.remove(viewHolder.getAdapterPosition());
+            FavAdapter.favCats.remove(viewHolder.getAdapterPosition());
             pls.notifyDataSetChanged();
-
-            if (favCats.size() == 0){
-                FavouriteRecyclerFragment.status.setText("No Favourites");
-            }
         }
     };
 }

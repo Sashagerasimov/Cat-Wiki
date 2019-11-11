@@ -27,6 +27,7 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class CatDetailActivity extends AppCompatActivity {
 
@@ -62,7 +63,6 @@ public class CatDetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         String id = intent.getStringExtra("id");
-        System.out.println(id);
         final Cat cat = Database.getCatById(id);
         toast = cat.getName();
         catName.setText(cat.getName());
@@ -80,12 +80,10 @@ public class CatDetailActivity extends AppCompatActivity {
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                System.out.println(response);
                 Gson gson = new Gson();
                 Image[] imageArray = gson.fromJson(response, Image[].class);
                 imageArrayList = new ArrayList<>(Arrays.asList(imageArray));
                 Image thisImage = imageArrayList.get(0);
-                System.out.println(thisImage.getUrl());
                 imageUrl = thisImage.getUrl();
                 Glide.with(CatDetailActivity.this).load(imageUrl).into(catPhoto);
 

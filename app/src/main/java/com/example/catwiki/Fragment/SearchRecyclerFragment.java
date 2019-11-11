@@ -78,7 +78,6 @@ public class SearchRecyclerFragment extends Fragment {
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                System.out.println(response);
                 Gson gson = new Gson();
 
                 Cat[] catsArray = gson.fromJson(response, Cat[].class);
