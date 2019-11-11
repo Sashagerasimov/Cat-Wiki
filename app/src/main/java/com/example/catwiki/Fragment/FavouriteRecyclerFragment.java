@@ -63,6 +63,9 @@ public class FavouriteRecyclerFragment extends Fragment {
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
             FavAdapter.favCats.remove(viewHolder.getAdapterPosition());
             pls.notifyDataSetChanged();
+            if (FavAdapter.favCats.size()==0){
+                status.setText("No Favourites");
+            }
         }
     };
 }
