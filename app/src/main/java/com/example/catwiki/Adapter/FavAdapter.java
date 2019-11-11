@@ -25,11 +25,9 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.FavouriteViewHol
     public static class FavouriteViewHolder extends RecyclerView.ViewHolder {
 
         public TextView favCatName;
-        public TextView removeFav;
         public FavouriteViewHolder(View v) {
             super(v);
             favCatName = v.findViewById(R.id.cat_name);
-            removeFav = v.findViewById(R.id.remove);
         }
     }
         @NonNull
@@ -44,18 +42,6 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.FavouriteViewHol
         public void onBindViewHolder(@NonNull final FavouriteViewHolder holder, final int position) {
         final Cat currentCat = favCats.get(position);
         holder.favCatName.setText(currentCat.getName());
-
-        holder.removeFav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               favCats.remove(currentCat);
-               notifyItemRemoved(position);
-
-               if (favCats.size() == 0){
-                   FavouriteRecyclerFragment.status.setText("No Favourites");
-               }
-            }
-        });
         }
     @Override
     public int getItemCount() {

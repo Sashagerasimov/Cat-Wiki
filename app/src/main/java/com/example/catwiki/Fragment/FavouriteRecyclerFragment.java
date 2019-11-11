@@ -7,8 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,10 +20,13 @@ import com.example.catwiki.R;
 
 import java.util.ArrayList;
 
+import static com.example.catwiki.Adapter.FavAdapter.favCats;
+
 public class FavouriteRecyclerFragment extends Fragment {
 
     public RecyclerView recyclerView;
     public static TextView status;
+    public FavAdapter pls;
 
     public FavouriteRecyclerFragment() {
 
@@ -34,18 +39,36 @@ public class FavouriteRecyclerFragment extends Fragment {
         recyclerView = view.findViewById(R.id.fav_rv);
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
+        new ItemTouchHelper(itemTouchCallback).attachToRecyclerView(recyclerView);
 
         final FavAdapter favAdapter = new FavAdapter();
         recyclerView.setAdapter(favAdapter);
+        pls = favAdapter;
 
         status = view.findViewById(R.id.empty);
 
-        if (FavAdapter.favCats.size() == 0){
+        if (favCats.size() == 0){
             status.setText("No Favourites");
         } else {
             status.setText("");
         }
-
         return view;
     }
+
+    ItemTouchHelper.SimpleCallback itemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            favCats.remove(viewHolder.getAdapterPosition());
+            pls.notifyDataSetChanged();
+
+            if (favCats.size() == 0){
+                FavouriteRecyclerFragment.status.setText("No Favourites");
+            }
+        }
+    };
 }
