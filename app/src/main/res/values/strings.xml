@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">CatWiki</string>
+    <string name="app_name">Cat Wiki</string>
     <string name="wiki"><u>View on Wikipedia</u></string>
 </resources>
