@@ -9,7 +9,6 @@
         android:roundIcon="@drawable/catwikiicon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.favouriteActivity"></activity>
         <activity android:name=".Activity.CatDetailActivity" />
         <activity android:name=".Model.Cat" />
         <activity
